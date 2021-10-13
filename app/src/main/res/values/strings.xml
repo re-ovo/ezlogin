@@ -18,4 +18,5 @@
     <string name="account_saved">Account saved</string>
     <string name="save">Save</string>
     <string name="about">About</string>
+    <string name="empty_account">Empty 2FA Accounts</string>
 </resources>

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -118,14 +119,21 @@ private fun Body(
                 .padding(16.dp),
             progress = progress
         )
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            contentPadding = PaddingValues(8.dp)
-        ) {
-            items(accounts) {
-                AccountCard(
-                    it
-                )
+
+        if(accounts.isEmpty()){
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+                Text(text = stringResource(R.string.empty_account))
+            }
+        } else {
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(2),
+                contentPadding = PaddingValues(8.dp)
+            ) {
+                items(accounts) {
+                    AccountCard(
+                        it
+                    )
+                }
             }
         }
     }
