@@ -19,6 +19,7 @@ import io.github.g00fy2.quickie.content.QRContent
 import me.rerere.ezlogin.ui.component.EzTopBar
 import me.rerere.ezlogin.ui.component.navigationBackIcon
 import me.rerere.ezlogin.ui.public.LocalNavController
+import me.rerere.ezlogin.util.checkGoogleSecret
 import me.rerere.ezlogin.util.toast
 
 @Composable
@@ -141,13 +142,23 @@ private fun Body(
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    addViewModel.addAccount(
-                        key, website, account
-                    )
-                    navController.popBackStack()
+                    if (key.isBlank() || website.isBlank() || account.isBlank()) {
+                        context.toast(
+                            text = "请填写完账号信息"
+                        )
+                    } else if(!checkGoogleSecret(key)){
+                        context.toast(
+                            text = "秘钥不合法"
+                        )
+                    } else {
+                        addViewModel.addAccount(
+                            key, website, account
+                        )
+                        navController.popBackStack()
+                    }
                 }
             ) {
-                Text(text = "添加")
+                Text(text = "添加此账号")
             }
             Button(
                 modifier = Modifier.fillMaxWidth(),

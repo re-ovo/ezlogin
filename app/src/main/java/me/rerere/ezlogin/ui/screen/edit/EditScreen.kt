@@ -15,6 +15,7 @@ import me.rerere.ezlogin.ui.component.EzTopBar
 import me.rerere.ezlogin.ui.component.navigationBackIcon
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.util.DataState
+import me.rerere.ezlogin.util.checkGoogleSecret
 import me.rerere.ezlogin.util.toast
 
 @Composable
@@ -32,7 +33,7 @@ fun EditScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        editViewModel.delete(id){
+                        editViewModel.delete(id) {
                             navController.popBackStack()
                         }
                     }) {
@@ -52,10 +53,10 @@ private fun Body(
     editViewModel: EditViewModel
 ) {
     val account by remember { editViewModel.loadAccount(id) }.collectAsState(initial = DataState.Empty)
-    when(account){
+    when (account) {
         is DataState.Loading,
         is DataState.Empty -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = "Loading")
             }
         }
@@ -63,13 +64,13 @@ private fun Body(
             account.readSafely()?.let {
                 Editor(it, editViewModel)
             } ?: run {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(text = "Account does not exits")
                 }
             }
         }
         is DataState.Error -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = "Error")
             }
         }
@@ -118,10 +119,16 @@ private fun Editor(
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    account.account = accountName
-                    account.website = website
-                    editViewModel.save(account){
-                        context.toast("保存完成")
+                    if (website.isBlank() || accountName.isBlank()) {
+                        context.toast(
+                            text = "请填写完账号信息"
+                        )
+                    } else {
+                        account.account = accountName
+                        account.website = website
+                        editViewModel.save(account) {
+                            context.toast("保存完成")
+                        }
                     }
                 }
             ) {
