@@ -1,6 +1,8 @@
 package me.rerere.ezlogin.ui.activity
 
+import android.os.Build
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -13,6 +15,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -114,13 +117,21 @@ class MainActivity : ComponentActivity() {
                                 EditScreen(id = it.arguments?.getInt("id") ?: 0)
                             }
 
-                            composable("about"){
+                            composable("about") {
                                 AboutScreen()
                             }
                         }
                     }
                 }
             }
+        }
+
+        // Prevent forced secondary inversion
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val existingComposeView = window.decorView
+                .findViewById<ViewGroup>(android.R.id.content)
+                .getChildAt(0) as? ComposeView
+            existingComposeView?.isForceDarkAllowed = false
         }
     }
 }
