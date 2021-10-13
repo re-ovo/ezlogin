@@ -105,8 +105,7 @@ private fun Body(
         while (true) {
             kotlinx.coroutines.delay(100)
             val start = (System.currentTimeMillis() / 30_000) * 30_000
-            value = (System.currentTimeMillis() - start).toFloat() / 30_000f
-            println(value)
+            value = ((System.currentTimeMillis() - start).toFloat() / 30_000f).coerceIn(0f..1f)
         }
     }
 
