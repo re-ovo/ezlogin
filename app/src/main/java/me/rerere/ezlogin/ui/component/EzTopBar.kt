@@ -17,7 +17,7 @@ fun EzTopBar(
     title: @Composable () -> Unit,
     navigationIcon: @Composable (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
-    backgroundColor: Color = MaterialTheme.colors.primary,
+    backgroundColor: Color = MaterialTheme.colors.primarySurface,
     contentColor: Color = contentColorFor(backgroundColor),
     elevation: Dp = AppBarDefaults.TopAppBarElevation,
 ) {
