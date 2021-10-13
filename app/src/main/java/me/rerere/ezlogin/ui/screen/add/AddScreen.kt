@@ -11,15 +11,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanQRCode
 import io.github.g00fy2.quickie.content.QRContent
+import me.rerere.ezlogin.R
 import me.rerere.ezlogin.ui.component.EzTopBar
 import me.rerere.ezlogin.ui.component.navigationBackIcon
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.util.checkGoogleSecret
+import me.rerere.ezlogin.util.stringResource
 import me.rerere.ezlogin.util.toast
 
 @Composable
@@ -33,7 +36,7 @@ fun AddScreen(
             EzTopBar(
                 navigationIcon = navigationBackIcon(navController),
                 title = {
-                    Text(text = "添加账号")
+                    Text(text = stringResource(R.string.add_account))
                 }
             )
         }
@@ -84,17 +87,28 @@ private fun Body(
                             }
                         }
                         else -> {
-                            context.toast("二维码格式错误！")
+                            context.toast(
+                                context.stringResource(
+                                    R.string.qrcode_bad_format
+                                )
+                            )
                         }
                     }
                 }
                 is QRResult.QRError -> {
                     context.toast(
-                        text = "扫描二维码时发生错误: ${qrResult.exception.javaClass.name}"
+                        text = context.stringResource(
+                            R.string.qrcode_scan_error,
+                            qrResult.exception.javaClass.name
+                        )
                     )
                 }
                 is QRResult.QRMissingPermission -> {
-                    context.toast("缺少相机权限，无法扫描二维码!")
+                    context.toast(
+                        context.stringResource(
+                            R.string.qrcode_no_permission
+                        )
+                    )
                 }
                 else -> {
                     // IGNORE
@@ -113,7 +127,7 @@ private fun Body(
                     key = it
                 },
                 label = {
-                    Text(text = "秘钥")
+                    Text(text = stringResource(R.string.secret))
                 }
             )
 
@@ -124,7 +138,7 @@ private fun Body(
                     website = it
                 },
                 label = {
-                    Text(text = "网站")
+                    Text(text = stringResource(R.string.website_name))
                 }
             )
 
@@ -135,7 +149,7 @@ private fun Body(
                     account = it
                 },
                 label = {
-                    Text(text = "账号")
+                    Text(text = stringResource(R.string.account_name))
                 }
             )
 
@@ -144,11 +158,15 @@ private fun Body(
                 onClick = {
                     if (key.isBlank() || website.isBlank() || account.isBlank()) {
                         context.toast(
-                            text = "请填写完账号信息"
+                            text = context.stringResource(
+                                R.string.information_not_complete
+                            )
                         )
                     } else if(!checkGoogleSecret(key)){
                         context.toast(
-                            text = "秘钥不合法"
+                            text = context.stringResource(
+                                R.string.invalid_secret
+                            )
                         )
                     } else {
                         addViewModel.addAccount(
@@ -158,7 +176,7 @@ private fun Body(
                     }
                 }
             ) {
-                Text(text = "添加此账号")
+                Text(text = stringResource(R.string.add_account))
             }
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -166,7 +184,7 @@ private fun Body(
                     scanner.launch(null)
                 }
             ) {
-                Text(text = "扫描二维码快速添加")
+                Text(text = stringResource(R.string.scan_qr_code))
             }
         }
     }

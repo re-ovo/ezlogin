@@ -8,14 +8,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import me.rerere.ezlogin.R
 import me.rerere.ezlogin.room.model.Account
 import me.rerere.ezlogin.ui.component.EzTopBar
 import me.rerere.ezlogin.ui.component.navigationBackIcon
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.util.DataState
 import me.rerere.ezlogin.util.checkGoogleSecret
+import me.rerere.ezlogin.util.stringResource
 import me.rerere.ezlogin.util.toast
 
 @Composable
@@ -29,7 +32,7 @@ fun EditScreen(
             EzTopBar(
                 navigationIcon = navigationBackIcon(navController),
                 title = {
-                    Text(text = "编辑")
+                    Text(text = stringResource(R.string.edit_account))
                 },
                 actions = {
                     IconButton(onClick = {
@@ -57,7 +60,7 @@ private fun Body(
         is DataState.Loading,
         is DataState.Empty -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "Loading")
+                Text(text = stringResource(R.string.loading))
             }
         }
         is DataState.Success -> {
@@ -65,13 +68,13 @@ private fun Body(
                 Editor(it, editViewModel)
             } ?: run {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = "Account does not exits")
+                    Text(text = stringResource(R.string.account_not_exists))
                 }
             }
         }
         is DataState.Error -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "Error")
+                Text(text = stringResource(R.string.load_error))
             }
         }
     }
@@ -101,7 +104,7 @@ private fun Editor(
                     website = it
                 },
                 label = {
-                    Text(text = "网站")
+                    Text(text = stringResource(R.string.website_name))
                 }
             )
 
@@ -112,7 +115,7 @@ private fun Editor(
                     accountName = it
                 },
                 label = {
-                    Text(text = "账号")
+                    Text(text = stringResource(R.string.account_name))
                 }
             )
 
@@ -121,18 +124,26 @@ private fun Editor(
                 onClick = {
                     if (website.isBlank() || accountName.isBlank()) {
                         context.toast(
-                            text = "请填写完账号信息"
+                            text = context.stringResource(
+                                R.string.information_not_complete
+                            )
                         )
                     } else {
                         account.account = accountName
                         account.website = website
                         editViewModel.save(account) {
-                            context.toast("保存完成")
+                            context.toast(
+                                context.stringResource(R.string.account_saved)
+                            )
                         }
                     }
                 }
             ) {
-                Text(text = "保存")
+                Text(
+                    text = stringResource(
+                        R.string.save
+                    )
+                )
             }
         }
     }

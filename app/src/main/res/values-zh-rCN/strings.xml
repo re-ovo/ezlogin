@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="code_copied">已复制到剪贴板 (%s)</string>
+    <string name="add_account">添加账号</string>
+    <string name="qrcode_bad_format">二维码格式错误</string>
+    <string name="qrcode_scan_error">扫描二维码时发生错误: %s</string>
+    <string name="qrcode_no_permission">未授予相机权限，无法扫描二维码</string>
+    <string name="secret">秘钥</string>
+    <string name="website_name">网站名</string>
+    <string name="account_name">账号名</string>
+    <string name="information_not_complete">请填写完信息</string>
+    <string name="invalid_secret">该秘钥不合法</string>
+    <string name="scan_qr_code">扫描二维码</string>
+    <string name="edit_account">编辑账号</string>
+    <string name="loading">加载中</string>
+    <string name="account_not_exists">该账户不存在</string>
+    <string name="load_error">加载时发生错误</string>
+    <string name="account_saved">账号已保存</string>
+    <string name="save">保存</string>
+    <string name="about">关于</string>
+</resources>

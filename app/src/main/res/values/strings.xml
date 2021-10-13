@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">EzLogin</string>
+    <string name="app_name" translatable="false">EzLogin</string>
+    <string name="code_copied">Copied to clipboard (%s)</string>
+    <string name="add_account">Add account</string>
+    <string name="qrcode_bad_format">Bad QRCode format</string>
+    <string name="qrcode_scan_error">An error occurred while scanning the QR code: %s</string>
+    <string name="qrcode_no_permission">You do not authorize the camera permission to scan the QR code</string>
+    <string name="secret">Secret</string>
+    <string name="website_name">Website Name</string>
+    <string name="account_name">Account Name</string>
+    <string name="information_not_complete">Incomplete information</string>
+    <string name="invalid_secret">Invalid secret</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="edit_account">Edit Account</string>
+    <string name="loading">Loading</string>
+    <string name="account_not_exists">The account does not exists</string>
+    <string name="load_error">An error occurred while loading</string>
+    <string name="account_saved">Account saved</string>
+    <string name="save">Save</string>
+    <string name="about">About</string>
 </resources>

@@ -30,6 +30,7 @@ import me.rerere.ezlogin.ui.component.EzTopBar
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.ui.theme.DigitFont
 import me.rerere.ezlogin.util.setClipboard
+import me.rerere.ezlogin.util.stringResource
 import me.rerere.ezlogin.util.toast
 import java.util.concurrent.TimeUnit
 
@@ -67,6 +68,7 @@ fun IndexScreen(
 
 @Composable
 private fun Menu() {
+    val navController = LocalNavController.current
     var showMenu by remember {
         mutableStateOf(false)
     }
@@ -80,15 +82,15 @@ private fun Menu() {
         expanded = showMenu,
         onDismissRequest = {
             showMenu = false
-        }) {
-        DropdownMenuItem(onClick = { /*TODO*/ }) {
-            Text(text = "导出/备份")
         }
-        DropdownMenuItem(onClick = { /*TODO*/ }) {
-            Text(text = "设置")
-        }
-        DropdownMenuItem(onClick = { /*TODO*/ }) {
-            Text(text = "关于")
+    ) {
+        DropdownMenuItem(
+            onClick = {
+                showMenu = false
+                navController.navigate("about")
+            }
+        ) {
+            Text(text = stringResource(R.string.about))
         }
     }
 }
@@ -154,7 +156,7 @@ private fun AccountCard(
                 onClick = {
                     context.setClipboard(code)
                     context.toast(
-                        text = "已复制到剪贴板 ($code)"
+                        text = context.stringResource(R.string.code_copied, code)
                     )
                 },
                 onLongClick = {

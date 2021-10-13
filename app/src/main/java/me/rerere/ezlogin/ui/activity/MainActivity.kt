@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.*
@@ -23,6 +22,7 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import me.rerere.ezlogin.ui.screen.about.AboutScreen
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.ui.screen.add.AddScreen
 import me.rerere.ezlogin.ui.screen.edit.EditScreen
@@ -112,6 +112,10 @@ class MainActivity : ComponentActivity() {
                                 )
                             ) {
                                 EditScreen(id = it.arguments?.getInt("id") ?: 0)
+                            }
+
+                            composable("about"){
+                                AboutScreen()
                             }
                         }
                     }
