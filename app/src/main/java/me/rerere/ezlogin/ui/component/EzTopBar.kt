@@ -36,22 +36,12 @@ fun EzTopBar(
 }
 
 @Composable
-fun SimpleEzTopBar(
-    navController: NavController,
-    title: String,
-    elevation: Dp = AppBarDefaults.TopAppBarElevation
-) {
-    EzTopBar(
-        navigationIcon = {
-            IconButton(onClick = {
-                navController.popBackStack()
-            }) {
-                Icon(Icons.Default.ArrowBack, null)
-            }
-        },
-        title = {
-            Text(text = title)
-        },
-        elevation = elevation
-    )
+fun navigationBackIcon(
+    navController: NavController
+) : @Composable (() -> Unit) = {
+    IconButton(onClick = {
+        navController.popBackStack()
+    }) {
+        Icon(Icons.Default.ArrowBack, null)
+    }
 }

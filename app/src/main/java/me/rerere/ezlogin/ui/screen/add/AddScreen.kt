@@ -2,9 +2,11 @@ package me.rerere.ezlogin.ui.screen.add
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,7 +16,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanQRCode
 import io.github.g00fy2.quickie.content.QRContent
-import me.rerere.ezlogin.ui.component.SimpleEzTopBar
+import me.rerere.ezlogin.ui.component.EzTopBar
+import me.rerere.ezlogin.ui.component.navigationBackIcon
 import me.rerere.ezlogin.ui.public.LocalNavController
 import me.rerere.ezlogin.util.toast
 
@@ -26,9 +29,11 @@ fun AddScreen(
     val context = LocalContext.current
     Scaffold(
         topBar = {
-            SimpleEzTopBar(
-                navController = navController,
-                title = "添加2FA"
+            EzTopBar(
+                navigationIcon = navigationBackIcon(navController),
+                title = {
+                    Text(text = "添加账号")
+                }
             )
         }
     ) {

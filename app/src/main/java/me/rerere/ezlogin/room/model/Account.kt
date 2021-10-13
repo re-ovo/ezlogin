@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 class Account(
     @PrimaryKey(autoGenerate = true) val primaryKey: Int = 0,
-    val account: String,
-    val website: String,
+    var account: String,
+    var website: String,
     val key: String
 )
