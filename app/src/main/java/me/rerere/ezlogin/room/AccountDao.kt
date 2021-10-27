@@ -1,7 +1,8 @@
-package me.rerere.ezlogin.room.model
+package me.rerere.ezlogin.room
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import me.rerere.ezlogin.room.model.Account
 
 @Dao
 interface AccountDao {

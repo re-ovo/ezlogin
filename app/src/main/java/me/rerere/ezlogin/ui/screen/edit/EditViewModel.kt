@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import me.rerere.ezlogin.room.model.Account
-import me.rerere.ezlogin.room.model.AppDatabase
+import me.rerere.ezlogin.room.AppDatabase
 import me.rerere.ezlogin.util.DataState
 import javax.inject.Inject
 

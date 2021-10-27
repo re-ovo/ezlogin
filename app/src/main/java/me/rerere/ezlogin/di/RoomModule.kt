@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import me.rerere.ezlogin.App
-import me.rerere.ezlogin.room.model.AppDatabase
+import me.rerere.ezlogin.room.AppDatabase
 import javax.inject.Singleton
 
 @Module

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.rerere.ezlogin.room.model.Account
-import me.rerere.ezlogin.room.model.AppDatabase
+import me.rerere.ezlogin.room.AppDatabase
 import javax.inject.Inject
 
 @HiltViewModel
